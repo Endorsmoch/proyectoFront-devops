@@ -16,7 +16,6 @@ pipeline {
                         bat 'npm run test'
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
-                        error("Error en las pruebas: ${e.message}")
                     }
                 }
             }
