@@ -11,8 +11,13 @@ pipeline {
 
         stage('Probar proyecto') {
             steps {
-                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                    bat 'npm run test'
+                script {
+                    try {
+                        bat 'npm run test'
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        error("Error en las pruebas: ${e.message}")
+                    }
                 }
             }
         }
