@@ -11,7 +11,9 @@ pipeline {
 
         stage('Probar proyecto') {
             steps {
-                bat 'npm run test'
+                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                    bat 'npm run test'
+                }
             }
         }
     }
