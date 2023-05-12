@@ -13,7 +13,7 @@ pipeline {
     post {
         success {
             echo '¡El pipeline se ha completado exitosamente! Ejecutandose segundo pipeline...'
-            build job: 'ProyectoFinalDevOpsPipelineDos', parameters: [string(name: 'BUILD_NUMBER', value: "'$currentBuild.number'")]
+            build job: 'FrontendStorePipeline2', parameters: [string(name: 'BUILD_NUMBER', value: "'$currentBuild.number'")]
         }
         failure {
             echo '¡El pipeline ha fallado!'
