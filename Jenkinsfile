@@ -8,8 +8,5 @@ pipeline {
                 bat 'npm run build --prod'
             }
         }
-
-        stage('Test') {
-        }
     }
 }
