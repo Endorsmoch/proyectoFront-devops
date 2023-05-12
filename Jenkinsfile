@@ -9,15 +9,9 @@ pipeline {
             }
         }
 
-        stage('Probar proyecto') {
+        stage('Test') {
             steps {
-                script {
-                    try {
-                        bat 'npm run test'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                    }
-                }
+                bat 'ng test'
             }
         }
     }
