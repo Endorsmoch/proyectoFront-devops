@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
+    }
+
+    environment {
+        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+        buildNumber = "${params.BUILD_NUMBER}"
+        buildNumberWithoutQuotes = buildNumber.replace("'", "")
+    }
+
+    stages {
+        stage('Detener Contenedores') {
+            steps {
+                bat 'FOR /f "tokens=*" %%i IN (\'docker ps -q\') DO docker stop %%i'
+            }
+        }
+        stage('Construir Imagen') {
+            steps {
+                bat "docker build -t store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes} ."
+            }
+        }
+        stage('Desplegar Imagen') {
+            steps {
+                bat "docker run -d -p 8081:80 --name store-frontend-1.0.0-${buildNumberWithoutQuotes} store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes}"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '¡El segundo pipeline se ha completado exitosamente!'
+        }
+        failure {
+            echo 'El segundo pipeline ha fallado!'
+        }
+    }
+}
