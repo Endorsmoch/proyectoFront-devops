@@ -8,3 +8,15 @@
 table {
     width: 100%;
 }
+
+.red-icon {
+    color: rgb(184, 4, 4);
+}
+
+.blue-icon {
+     color: rgb(30, 30, 155);
+}
+
+.pointer {
+    cursor: pointer;
+}
