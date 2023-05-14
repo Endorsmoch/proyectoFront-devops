@@ -10,9 +10,9 @@ const routes: Routes = [
   {path: 'lobby', component: LobbyComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'user-crud', component: UserCrudComponent},
-  {path: '**', redirectTo: 'lobby', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent}
+  {path: '**', redirectTo: 'lobby', pathMatch: 'full'},
   
 
 ];
