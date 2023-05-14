@@ -10,23 +10,13 @@
         <div class="card border-0 shadow rounded-3">
           <div class="card-body px-5">
             <h5 class="card-title text-center fw-normal fs-4 pt-3">
-              Registrate
+              Iniciar sesión
             </h5>
             <form
-              [formGroup]="registerForm"
+              [formGroup]="loginForm"
               (ngSubmit)="onSubmit()"
               class="pt-3"
             >
-              <div class="form-floating mb-3">
-                <input
-                  type="username"
-                  class="form-control"
-                  id="floatingInput1"
-                  placeholder="username"
-                  formControlName="userName"
-                />
-                <label htmlFor="floatingInput1">Usuario</label>
-              </div>
               <div class="form-floating mb-3">
               <input
                   type="email"
@@ -47,13 +37,13 @@
                 />
                 <label htmlFor="floatingPassword">Contraseña</label>
               </div>
+              <p>¿No tienes cuenta? <a href="/register">Registrate</a></p>
               <div class="row justify-content-between py-3">
-                <a href="/login" class="btn btn-secondary col-md-5 my-1">Regresar</a>
                 <button
-                  class="col-md-5 btn btn-primary fw-bold my-1"
+                  class="btn btn-primary fw-bold my-1"
                   type="submit"
                 >
-                  Registrarse
+                  Iniciar sesión
                 </button>
               </div>
             </form>
