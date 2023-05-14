@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { Crypto } from 'src/app/util/crypto';
 
 @Component({
@@ -9,10 +11,10 @@ import { Crypto } from 'src/app/util/crypto';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit{
-  protected isLoginError: boolean = false;
   protected registerForm!: FormGroup;
   private crypto = new Crypto;
-  //constructor(private authService: AuthService, private cookieService: CookieService, private router: Router) { }
+  
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
       this.registerForm = this.initRegisterForm();
@@ -32,17 +34,14 @@ export class RegisterComponent implements OnInit{
       'email' : formUser.email,
       'password' : this.crypto.encrypted(formUser.password)
     } 
-    console.log(newUser);
-    
-  //   this.authService.login(username, password).subscribe(
-  //     response => {
-  //       this.isLoginError = false;
-  //       this.cookieService.set('token', response.access_token);
-  //       this.router.navigate(['/'])
-  //     },
-  //     error => {
-  //       this.isLoginError = true;
-  //     }
-  //   );
+
+    this.authService.register(newUser.userName, newUser.email, newUser.password).subscribe(
+      (response) => {
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }
