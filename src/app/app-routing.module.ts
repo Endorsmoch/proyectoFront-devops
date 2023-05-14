@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './pages/register/register.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { UserCrudComponent } from './pages/user-crud/user-crud.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'lobby', pathMatch: 'full'},
@@ -10,7 +11,10 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'user-crud', component: UserCrudComponent},
   {path: '**', redirectTo: 'lobby', pathMatch: 'full'},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent}
   
+
 ];
 
 @NgModule({

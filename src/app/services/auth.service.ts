@@ -19,8 +19,8 @@ export class AuthService {
     return this.http.post<any>(this.url+'/register', { userName, email,password }, this.httpOptions);
   }
   
-  login(username: string, password: string) {
-    return this.http.post<any>(this.url+'/login', { username, password });
+  login(email: string, password: string) {
+    return this.http.post<any>(this.url+'/login', { email, password });
   }
 
   

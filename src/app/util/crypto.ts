@@ -1,13 +1,14 @@
 import * as CryptoJS from 'crypto-js';
 
 export class Crypto {
-    private key = '23Sr3YuUc4ttANnSsIs3g';
-    
+    private key = CryptoJS.enc.Hex.parse('23Sr3YuUc4ttANnSsIs3g');
+    private iv = CryptoJS.enc.Hex.parse('101112131415161718191a1b1c1d1e1f'); // IV en formato hexadecimal
+
     public encrypted(text: string): string {
-        return CryptoJS.AES.encrypt(text, this.key).toString();
+        return (CryptoJS.AES.encrypt(text, this.key,{iv:this.iv})).toString();
     }
 
     public decrypted(text: string): string {
-        return (CryptoJS.AES.decrypt(text, this.key)).toString(CryptoJS.enc.Utf8);;
+        return (CryptoJS.AES.decrypt(text, this.key)).toString(CryptoJS.enc.Utf8);
     }
 }

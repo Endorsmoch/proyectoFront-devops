@@ -25,7 +25,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
-
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import {MatCardModule} from '@angular/material/card';
     UserCrudComponent,
     LobbyComponent,
     NavbarComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
