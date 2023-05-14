@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Detener Contenedores') {
             steps {
-                bat 'FOR /f "tokens=*" %%i IN (\'docker ps -q\') DO docker stop %%i'
+                bat 'FOR /f "tokens=*" %%i IN (\'docker ps -q --filter "name=store-frontend-1.0.0-" \') DO docker stop %%i'
             }
         }
         stage('Construir Imagen') {
