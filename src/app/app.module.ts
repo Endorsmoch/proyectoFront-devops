@@ -33,7 +33,7 @@ import { LoginComponent } from './pages/login/login.component';
     RegisterComponent,
     UserCrudComponent,
     LobbyComponent,
-    NavbarComponent
+    NavbarComponent,
     LoginComponent
   ],
   imports: [
