@@ -5,6 +5,7 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { UserCrudComponent } from './pages/user-crud/user-crud.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -12,15 +13,14 @@ const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [AuthGuard], 
     children: [
       {path: '', redirectTo: 'lobby', pathMatch: 'full'},
       {path: 'lobby', component: LobbyComponent},
-      {path: 'register', component: RegisterComponent},
       {path: 'user-crud', component: UserCrudComponent},
       {path: '**', redirectTo: 'lobby', pathMatch: 'full'},
     ]
   },
-  
 
 ];
 
