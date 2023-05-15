@@ -1,0 +1,187 @@
+<div class="container">
+    <mat-toolbar>
+        <span> Direcciones</span>
+        <span class="example-spacer"></span>
+        <a class="pointer" style="align-items: right;" matTooltip="Agregar dirección" (click)="toggleCreationCardVisibility()">
+            <mat-icon class="blue-icon">
+              playlist_add
+            </mat-icon>
+        </a>
+    </mat-toolbar>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+      
+          <!-- ID User Column -->
+          <ng-container matColumnDef="idUser">
+            <th mat-header-cell *matHeaderCellDef> ID Usuario </th>
+            <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+          </ng-container>
+      
+          <!-- HouseNumber Column -->
+          <ng-container matColumnDef="houseNum">
+            <th mat-header-cell *matHeaderCellDef> Num. Casa </th>
+            <td mat-cell *matCellDef="let element"> {{element.houseNum}} </td>
+          </ng-container>
+
+          <!-- Street Column -->
+          <ng-container matColumnDef="street">
+            <th mat-header-cell *matHeaderCellDef> Calle </th>
+            <td mat-cell *matCellDef="let element"> {{element.street}} </td>
+          </ng-container>
+
+          <!-- City Column -->
+          <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+            <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+          </ng-container>
+
+           <!-- State Column -->
+           <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+          </ng-container>
+
+          <!-- Country Column -->
+          <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef> País </th>
+            <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+          </ng-container>
+
+          <!-- Postal Code Column -->
+          <ng-container matColumnDef="postalCode">
+            <th mat-header-cell *matHeaderCellDef> Código Postal </th>
+            <td mat-cell *matCellDef="let element"> {{element.postalCode}} </td>
+          </ng-container>
+
+          <!-- Options Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+              <a class="pointer" matTooltip="Editar datos de dirección" (click)="editAddress(element); toggleEditionCardVisibility()">
+                <mat-icon class="blue-icon">
+                  edit
+                </mat-icon>
+              </a>
+              <a class="pointer" matTooltip="Eliminar dirección" (click)="editAddress(element); toggleDeletionCardVisibility()">
+                <mat-icon class="red-icon">
+                  delete
+                </mat-icon>
+              </a>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10]"
+                       showFirstLastButtons
+                       aria-label="Seleccione la página de Direcciones">
+        </mat-paginator>
+      </div>
+      
+      <!-- Formulario de edición -->
+      <mat-card *ngIf="isEditionCardVisible">
+        <mat-card-header>
+          <mat-card-title>Editar dirección</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+              <input matInput placeholder="ID Usuario" [(ngModel)]="selectedAddress.idUser" name="idUser">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Numero Casa" [(ngModel)]="selectedAddress.houseNum" name="houseNum">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Calle" [(ngModel)]="selectedAddress.street" name="street">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Ciudad" [(ngModel)]="selectedAddress.city" name="city">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Estado" [(ngModel)]="selectedAddress.state" name="state">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="País" [(ngModel)]="selectedAddress.country" name="country">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Código Postal" [(ngModel)]="selectedAddress.postalCode" name="postalCode">      
+            </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="saveChanges(); toggleEditionCardVisibility()">Guardar cambios</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleEditionCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Formulario de creación -->
+      <mat-card *ngIf="isCreationCardVisible">
+        <mat-card-header>
+          <mat-card-title>Crear producto</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+                <input matInput placeholder="ID Usuario" [(ngModel)]="selectedAddress.idUser" name="idUser">      
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Numero Casa" [(ngModel)]="selectedAddress.houseNum" name="houseNum">      
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Calle" [(ngModel)]="selectedAddress.street" name="street">      
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Ciudad" [(ngModel)]="selectedAddress.city" name="city">      
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Estado" [(ngModel)]="selectedAddress.state" name="state">      
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="País" [(ngModel)]="selectedAddress.country" name="country">      
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Código Postal" [(ngModel)]="selectedAddress.postalCode" name="postalCode">      
+              </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="createAddress(); toggleCreationCardVisibility()">Crear Dirección</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleCreationCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Carta de eliminación -->
+      <mat-card *ngIf="isDeletionCardVisible">
+        <mat-card-header>
+          <mat-card-title>¿Seguro que deseas eliminar la siguiente dirección?</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+              <input matInput placeholder="Casa" [(ngModel)]="selectedAddress.houseNum" name="houseNum">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Calle" [(ngModel)]="selectedAddress.street" name="street">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Ciudad" [(ngModel)]="selectedAddress.city" name="city">
+            </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="deleteAddress(); toggleDeletionCardVisibility()">Eliminar Dirección</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+</div>
+
