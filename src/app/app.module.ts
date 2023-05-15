@@ -28,6 +28,7 @@ import {MatCardModule} from '@angular/material/card';
 import { LoginComponent } from './pages/login/login.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 import { CommentCrudComponent } from './pages/comment-crud/comment-crud.component';
+import { AddressCrudComponent } from './pages/address-crud/address-crud.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { CommentCrudComponent } from './pages/comment-crud/comment-crud.componen
     LoginComponent,
     MainLayoutComponent,
     ProductCrudComponent,
-    CommentCrudComponent
+    CommentCrudComponent,
+    AddressCrudComponent
   ],
   imports: [
     BrowserModule,
