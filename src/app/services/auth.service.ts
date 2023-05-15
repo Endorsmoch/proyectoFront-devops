@@ -24,6 +24,16 @@ export class AuthService {
     return this.http.post<any>(this.url + '/login', { email, password });
   }
 
+  logout() {
+    const token = this.getToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    return this.http.post<any>(this.url + '/logout', {},httpOptions);
+  }
+
   //Recuperar token
   getToken(): string | null {
     return localStorage.getItem('token');
