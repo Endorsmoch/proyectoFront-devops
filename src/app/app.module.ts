@@ -27,6 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
 import { LoginComponent } from './pages/login/login.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
+import { CommentCrudComponent } from './pages/comment-crud/comment-crud.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MainLayoutComponent } from './shared/main-layout/main-layout.component'
     NavbarComponent,
     LoginComponent,
     MainLayoutComponent,
-    ProductCrudComponent
+    ProductCrudComponent,
+    CommentCrudComponent
   ],
   imports: [
     BrowserModule,
