@@ -1,0 +1,158 @@
+<div class="container">
+    <mat-toolbar>
+        <span>Productos</span>
+        <span class="example-spacer"></span>
+        <a class="pointer" style="align-items: right;" matTooltip="Agregar producto" (click)="toggleCreationCardVisibility()">
+            <mat-icon class="blue-icon">
+              playlist_add
+            </mat-icon>
+        </a>
+    </mat-toolbar>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+      
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+      
+          <!-- Manufacturer Column -->
+          <ng-container matColumnDef="manufacturer">
+            <th mat-header-cell *matHeaderCellDef> Fabricante </th>
+            <td mat-cell *matCellDef="let element"> {{element.manufacturer}} </td>
+          </ng-container>
+
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Precio </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          </ng-container>
+
+          <!-- Stock Column -->
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef> Stock </th>
+            <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
+          </ng-container>
+
+          <!-- Options Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+              <a class="pointer" matTooltip="Editar datos de producto" (click)="editProduct(element); toggleEditionCardVisibility()">
+                <mat-icon class="blue-icon">
+                  edit
+                </mat-icon>
+              </a>
+              <a class="pointer" matTooltip="Eliminar producto" (click)="editProduct(element); toggleDeletionCardVisibility()">
+                <mat-icon class="red-icon">
+                  delete
+                </mat-icon>
+              </a>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10]"
+                       showFirstLastButtons
+                       aria-label="Seleccione la página de Usuarios">
+        </mat-paginator>
+      </div>
+      
+      <!-- Formulario de edición -->
+      <mat-card *ngIf="isEditionCardVisible">
+        <mat-card-header>
+          <mat-card-title>Editar producto</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+              <input matInput placeholder="Nombre del producto" [(ngModel)]="selectedProduct.name" name="name">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Descripción del producto" [(ngModel)]="selectedProduct.description" name="description">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Fabricante" [(ngModel)]="selectedProduct.manufacturer" name="manufacturer">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Precio" [(ngModel)]="selectedProduct.price" name="price">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Stock" [(ngModel)]="selectedProduct.stock" name="stock">      
+            </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="saveChanges(); toggleEditionCardVisibility()">Guardar cambios</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleEditionCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Formulario de creación -->
+      <mat-card *ngIf="isCreationCardVisible">
+        <mat-card-header>
+          <mat-card-title>Crear producto</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+              <input matInput placeholder="Nombre del producto" [(ngModel)]="selectedProduct.name" name="name">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Descripción del producto" [(ngModel)]="selectedProduct.description" name="description">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Fabricante" [(ngModel)]="selectedProduct.manufacturer" name="manufacturer">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Precio" [(ngModel)]="selectedProduct.price" name="price">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Stock" [(ngModel)]="selectedProduct.stock" name="stock">      
+            </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="createProduct(); toggleCreationCardVisibility()">Crear Producto</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleCreationCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Carta de eliminación -->
+      <mat-card *ngIf="isDeletionCardVisible">
+        <mat-card-header>
+          <mat-card-title>¿Seguro que deseas eliminar el siguiente producto?</mat-card-title>
+          <p>{{selectedProduct.id}}</p>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+              <input matInput placeholder="Nombre del producto" [(ngModel)]="selectedProduct.name" name="name">
+            </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="deleteProduct(); toggleDeletionCardVisibility()">Eliminar Producto</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+</div>
+

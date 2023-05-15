@@ -14,6 +14,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { UserCrudComponent } from './pages/user-crud/user-crud.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { ProductCrudComponent } from './pages/product-crud/product-crud.component';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,11 +23,11 @@ import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
 import { LoginComponent } from './pages/login/login.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MainLayoutComponent } from './shared/main-layout/main-layout.component'
     LobbyComponent,
     NavbarComponent,
     LoginComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    ProductCrudComponent
   ],
   imports: [
     BrowserModule,
