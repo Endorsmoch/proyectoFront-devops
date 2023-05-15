@@ -71,7 +71,7 @@
       
         <mat-paginator [pageSizeOptions]="[5, 10]"
                        showFirstLastButtons
-                       aria-label="Seleccione la página de Usuarios">
+                       aria-label="Seleccione la página de Productos">
         </mat-paginator>
       </div>
       
@@ -139,7 +139,6 @@
       <mat-card *ngIf="isDeletionCardVisible">
         <mat-card-header>
           <mat-card-title>¿Seguro que deseas eliminar el siguiente producto?</mat-card-title>
-          <p>{{selectedProduct.id}}</p>
         </mat-card-header>
         <mat-card-content>
           <form class="example-form">
