@@ -9,7 +9,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ProductCrudComponent } from './pages/product-crud/product-crud.component';
 import { CommentCrudComponent } from './pages/comment-crud/comment-crud.component';
 import { AddressCrudComponent } from './pages/address-crud/address-crud.component';
-
+import { OrderCrudComponent } from './pages/order-crud/order-crud.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
@@ -24,6 +24,7 @@ const routes: Routes = [
       {path: 'product-crud', component: ProductCrudComponent},
       {path: 'comment-crud', component:CommentCrudComponent},
       {path: 'address-crud', component:AddressCrudComponent},
+      {path: 'order-crud', component:OrderCrudComponent},
       {path: '**', redirectTo: 'lobby', pathMatch: 'full'},
     ]
   },

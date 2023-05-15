@@ -15,6 +15,11 @@ import { UserCrudComponent } from './pages/user-crud/user-crud.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProductCrudComponent } from './pages/product-crud/product-crud.component';
+import { CommentCrudComponent } from './pages/comment-crud/comment-crud.component';
+import { AddressCrudComponent } from './pages/address-crud/address-crud.component';
+import { OrderCrudComponent } from './pages/order-crud/order-crud.component';
+import { LoginComponent } from './pages/login/login.component';
+import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,10 +30,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
-import { LoginComponent } from './pages/login/login.component';
-import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
-import { CommentCrudComponent } from './pages/comment-crud/comment-crud.component';
-import { AddressCrudComponent } from './pages/address-crud/address-crud.component';
+
+
 
 
 @NgModule({
@@ -42,7 +45,8 @@ import { AddressCrudComponent } from './pages/address-crud/address-crud.componen
     MainLayoutComponent,
     ProductCrudComponent,
     CommentCrudComponent,
-    AddressCrudComponent
+    AddressCrudComponent,
+    OrderCrudComponent
   ],
   imports: [
     BrowserModule,
