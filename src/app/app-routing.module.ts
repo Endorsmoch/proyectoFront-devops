@@ -6,6 +6,7 @@ import { UserCrudComponent } from './pages/user-crud/user-crud.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ProductCrudComponent } from './pages/product-crud/product-crud.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'lobby', pathMatch: 'full'},
       {path: 'lobby', component: LobbyComponent},
       {path: 'user-crud', component: UserCrudComponent},
+      {path: 'product-crud', component: ProductCrudComponent},
       {path: '**', redirectTo: 'lobby', pathMatch: 'full'},
     ]
   },
