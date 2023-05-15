@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { UserCrudComponent } from './pages/user-crud/user-crud.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
-import { NavbarComponent } from './pages/navbar/navbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,6 +26,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
 import { LoginComponent } from './pages/login/login.component';
+import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoginComponent } from './pages/login/login.component';
     UserCrudComponent,
     LobbyComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,
