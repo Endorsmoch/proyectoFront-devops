@@ -75,8 +75,6 @@ export class UserCrudComponent implements AfterViewInit, OnInit{
 
 }
 
-
-
 const USER_DATA: UserCrud[] = [
   {id: 1, userName: 'Hydrogen', email: "1.0079@", password: 'H'},
   {id: 2, userName: 'Helium', email: "4.0026@", password: 'He'},
