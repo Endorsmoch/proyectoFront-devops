@@ -26,6 +26,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
 import { LoginComponent } from './pages/login/login.component';
+import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoginComponent } from './pages/login/login.component';
     UserCrudComponent,
     LobbyComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,

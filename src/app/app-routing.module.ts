@@ -4,15 +4,22 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { UserCrudComponent } from './pages/user-crud/user-crud.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'lobby', pathMatch: 'full'},
-  {path: 'lobby', component: LobbyComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'user-crud', component: UserCrudComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: '**', redirectTo: 'lobby', pathMatch: 'full'},
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      {path: '', redirectTo: 'lobby', pathMatch: 'full'},
+      {path: 'lobby', component: LobbyComponent},
+      {path: 'register', component: RegisterComponent},
+      {path: 'user-crud', component: UserCrudComponent},
+      {path: '**', redirectTo: 'lobby', pathMatch: 'full'},
+    ]
+  },
   
 
 ];
