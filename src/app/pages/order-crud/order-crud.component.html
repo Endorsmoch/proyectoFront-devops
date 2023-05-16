@@ -1,0 +1,156 @@
+<div class="container">
+    <mat-toolbar>
+        <span> Ordenes</span>
+        <span class="example-spacer"></span>
+        <a class="pointer" style="align-items: right;" matTooltip="Agregar orden" (click)="toggleCreationCardVisibility()">
+            <mat-icon class="blue-icon">
+              playlist_add
+            </mat-icon>
+        </a>
+    </mat-toolbar>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+      
+          <!-- ID User Column -->
+          <ng-container matColumnDef="idUser">
+            <th mat-header-cell *matHeaderCellDef> ID Usuario </th>
+            <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+          </ng-container>
+
+          <!-- ID Product Column -->
+          <ng-container matColumnDef="idProduct">
+            <th mat-header-cell *matHeaderCellDef> ID Producto </th>
+            <td mat-cell *matCellDef="let element"> {{element.idProduct}} </td>
+          </ng-container>
+      
+          <!-- Amount Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+          </ng-container>
+
+          <!-- Date Column -->
+          <ng-container matColumnDef="paymentDate">
+            <th mat-header-cell *matHeaderCellDef> Fecha de pago </th>
+            <td mat-cell *matCellDef="let element"> {{element.paymentDate}} </td>
+          </ng-container>
+
+          <!-- Payment Method Column -->
+          <ng-container matColumnDef="paymentMethod">
+            <th mat-header-cell *matHeaderCellDef> Método de pago </th>
+            <td mat-cell *matCellDef="let element"> {{element.paymentMethod}} </td>
+          </ng-container>
+
+          <!-- Options Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+              <a class="pointer" matTooltip="Editar datos de orden" (click)="editOrder(element); toggleEditionCardVisibility()">
+                <mat-icon class="blue-icon">
+                  edit
+                </mat-icon>
+              </a>
+              <a class="pointer" matTooltip="Eliminar orden" (click)="editOrder(element); toggleDeletionCardVisibility()">
+                <mat-icon class="red-icon">
+                  delete
+                </mat-icon>
+              </a>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10]"
+                       showFirstLastButtons
+                       aria-label="Seleccione la página de Ordenes">
+        </mat-paginator>
+      </div>
+      
+      <!-- Formulario de edición -->
+      <mat-card *ngIf="isEditionCardVisible">
+        <mat-card-header>
+          <mat-card-title>Editar orden</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+              <input matInput placeholder="ID Usuario" [(ngModel)]="selectedOrder.idUser" name="idUser">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="ID Producto" [(ngModel)]="selectedOrder.idProduct" name="idProduct">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Cantidad" [(ngModel)]="selectedOrder.amount" name="amount">      
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Método de pago" [(ngModel)]="selectedOrder.paymentMethod" name="paymentMethod">      
+            </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="saveChanges(); toggleEditionCardVisibility()">Guardar cambios</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleEditionCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Formulario de creación -->
+      <mat-card *ngIf="isCreationCardVisible">
+        <mat-card-header>
+          <mat-card-title>Crear producto</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+                <input matInput placeholder="ID Usuario" [(ngModel)]="selectedOrder.idUser" name="idUser">      
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="ID Producto" [(ngModel)]="selectedOrder.idProduct" name="idProduct">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Cantidad" [(ngModel)]="selectedOrder.amount" name="amount">      
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Método de pago" [(ngModel)]="selectedOrder.paymentMethod" name="paymentMethod">      
+              </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="createOrder(); toggleCreationCardVisibility()">Crear Orden</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleCreationCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Carta de eliminación -->
+      <mat-card *ngIf="isDeletionCardVisible">
+        <mat-card-header>
+          <mat-card-title>¿Seguro que deseas eliminar la siguiente orden?</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+              <input matInput placeholder="ID User" [(ngModel)]="selectedOrder.idUser" name="idUser">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="ID Product" [(ngModel)]="selectedOrder.idProduct" name="idProduct">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Cantidad" [(ngModel)]="selectedOrder.amount" name="amount">
+            </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="deleteOrder(); toggleDeletionCardVisibility()">Eliminar Orden</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+</div>
