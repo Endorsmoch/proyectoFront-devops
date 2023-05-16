@@ -7,7 +7,9 @@ import { UserService } from 'src/app/services/user.service';
 import { of } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('UserCrudComponent', () => {
   let component: UserCrudComponent;
@@ -17,7 +19,7 @@ describe('UserCrudComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserCrudComponent],
-      imports: [ReactiveFormsModule, HttpClientTestingModule,MatToolbarModule],
+      imports: [ReactiveFormsModule, HttpClientTestingModule,MatToolbarModule, MatPaginatorModule, MatTableModule,BrowserAnimationsModule],
       providers: [UserService],
     }).compileComponents();
   });  
@@ -45,9 +47,6 @@ describe('UserCrudComponent', () => {
     expect(userService.getAll).toHaveBeenCalled();
     expect(component.userList).toEqual(mockUserData);
     expect(component.dataSource.data).toEqual(mockUserData);
-    // Add more assertions as needed
   });
-
-  // Add more test cases for other component methods and functionalities
 
 });
