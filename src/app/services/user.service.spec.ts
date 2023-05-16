@@ -42,7 +42,6 @@ describe('UserService', () => {
     const id = 1;
 
     userService.delete(id).subscribe(() => {
-      // Verify that the delete was successful
     });
 
     const req = httpTestingController.expectOne(`http://localhost:8000/api/account/users/${id}`);
