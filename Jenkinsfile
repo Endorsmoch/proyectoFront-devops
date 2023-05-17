@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Test Cases') {
             steps {
-                bat 'ng test --progress=false --watch=false'
+                bat 'npm run test --progress=false --watch=false'
             }
         }
         stage('Compilar proyecto') {
