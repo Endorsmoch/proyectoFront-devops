@@ -1,4 +1,4 @@
-<mat-toolbar class="body">
+<!-- <mat-toolbar class="body">
     <span> DeepSea Store </span>
     <span class="example-spacer"></span>
     <button mat-button routerLink="/lobby">Inicio</button>
@@ -9,4 +9,38 @@
     <button mat-button routerLink="/order-crud">Ordenes</button>
     <span class="example-spacer"></span>
     <button mat-raised-button (click)="logout()">Cerrar Sesión</button>
-</mat-toolbar>
+</mat-toolbar> -->
+<mat-toolbar class="body">
+    <span>DeepSea Store</span>
+    <span class="spacer-small"></span>
+    <div class="navbar-container" *ngIf="!isScreenSmall">
+        <table>
+            <th><button mat-button class="normal" routerLink="/lobby">Inicio</button></th>
+            <th><button mat-button class="normal" routerLink="/user-crud">Usuarios</button></th>
+            <th><button mat-button class="normal" routerLink="/product-crud">Productos</button></th>
+            <th><button mat-button class="normal" outerLink="/comment-crud">Comentarios</button></th>
+            <th><button mat-button class="normal" routerLink="/address-crud">Direcciones</button></th>
+            <th><button mat-button class="normal" routerLink="/order-crud">Ordenes</button></th>
+        </table>
+        <span class="spacer"></span>
+      <button mat-raised-button class="logout-button" (click)="logout()">Cerrar Sesión</button>
+    </div>
+
+    
+    <div class="navbar-container" *ngIf="isScreenSmall">
+        
+        <button mat-icon-button *ngIf="isScreenSmall" [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    
+  </mat-toolbar>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/lobby">Inicio</button>
+    <button mat-menu-item routerLink="/user-crud">Usuarios</button>
+    <button mat-menu-item routerLink="/product-crud">Productos</button>
+    <button mat-menu-item routerLink="/comment-crud">Comentarios</button>
+    <button mat-menu-item routerLink="/address-crud">Direcciones</button>
+    <button mat-menu-item routerLink="/order-crud">Ordenes</button>
+    <button mat-menu-item class="logout-button" (click)="logout()">Cerrar Sesión</button>
+  </mat-menu>
