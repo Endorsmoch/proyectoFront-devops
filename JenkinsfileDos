@@ -15,14 +15,25 @@ pipeline {
         stage('Detener contenedor frontend') {
             steps {
                 bat '''
-                    docker ps -a --filter "name=frontend" --format "{{.Names}}" > containers.txt
-                    SET /p containers=<containers.txt
-                    IF "%containers%" == "" (
-                        echo No hay contenedores por detener
-                    ) ELSE (
-                        FOR /F "tokens=*" %%G IN (containers.txt) DO (
-                            docker stop %%G
+                    SETLOCAL EnableDelayedExpansion
+                    SET "contenedores="
+
+                    FOR /F "tokens=*" %%A IN ('docker ps --filter "name=frontend" --format "{{.Names}}"') DO (
+                        SET "contenedores=!contenedores! %%A"
+                    )
+
+                    SET contadoresCount=0
+                    FOR %%B IN (!contenedores!) DO (
+                        SET /A contadoresCount+=1
+                    )
+
+                    IF !contadoresCount! equ 1 (
+                        echo Solo hay un contenedor por detener
+                        FOR %%B IN (!contenedores!) DO (
+                            docker stop %%B
                         )
+                    ) ELSE (
+                        echo Hay múltiples contenedores que cumplen la condición
                     )
                 '''
             }
