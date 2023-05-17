@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Ejecutar Test Cases') {
             steps {
-                bat 'npm test'
+                bat 'npm test --no-watch'
             }
         }
     }
