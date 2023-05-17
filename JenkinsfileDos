@@ -17,13 +17,13 @@ pipeline {
                 script {
                     def containers = bat(returnStdout: true, script: 'docker ps -a --filter "name=frontend" --format "{{.Names}}"').trim()
                     if (containers) {
-                        bat 'for /f "tokens=1" %%c in (\'docker ps --filter "name=frontend" --format "{{.Names}}"\') do docker stop %%c'
+                        bat 'for /f "tokens=1" %%c in (\'docker ps -a --filter "name=frontend" --format "{{.Names}}"\') do docker stop %%c'
                     } else {
                         echo 'No hay contenedores para detener.'
                     }
                 }
             }
-        }   
+        }
         stage('Construir Imagen') {
             steps {
                 bat "docker build -t store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes} ."
