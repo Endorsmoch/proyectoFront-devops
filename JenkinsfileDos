@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        stage('Detener contenedores') {
+        stage('Stop frontend containers') {
             steps {
                 bat 'FOR /f "tokens=*" %%i IN (\'docker ps --filter name=frontend -q\') DO docker stop %%i'
             }
