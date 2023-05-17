@@ -14,9 +14,9 @@ pipeline {
     stages {
         stage('Detener contenedores') {
             steps {
-                bat 'for /f "tokens=1" %c in (\'docker ps -a --filter "name=frontend" --format "{{.Names}}"\') do docker stop %c'
+                bat 'for /f "tokens=1" %%c in (\'docker ps -a --filter "name=frontend" --format "{{.Names}}"\') do docker stop %%c'
             }
-        }
+        }        
         stage('Construir Imagen') {
             steps {
                 bat "docker build -t store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes} ."
