@@ -2,11 +2,14 @@ pipeline {
     agent any
     
     stages {
-        stage('Ejecutar Test Cases') {
+        stage('Test') {
             steps {
-                bat 'npm run test'
+                // Instalar las dependencias
+                bat 'npm install'
+                
+                // Ejecutar las pruebas sin abrir una ventana de Chrome
+                bat 'ng test --no-watch --browsers=ChromeHeadless'
             }
-        }
         stage('Compilar proyecto') {
             steps {
                 bat 'npm install'
