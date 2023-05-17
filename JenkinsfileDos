@@ -15,12 +15,12 @@ pipeline {
         stage('Detener Contenedores') {
             steps {
                 script {
-                    def containers = powershell(script: 'docker ps -q --filter "name=store-frontend-1.0.0-"', returnStdout: true).trim()
+                    def containers = bat(script: 'docker ps -q --filter "name=store-frontend-1.0.0-"', returnStdout: true).trim()
                     
                     if (containers.isEmpty()) {
                         echo 'No se encontraron contenedores de frontend encendidos'
                     } else {
-                        powershell "docker stop ${containers}"
+                        bat "FOR /f %%i IN ('echo ${containers}') DO docker stop %%i"
                     }
                 }
             }
