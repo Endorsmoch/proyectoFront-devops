@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Ejecutar Test Cases') {
             steps {
-                bat 'ng test'
+                bat 'npm test'
             }
         }
     }
