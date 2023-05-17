@@ -14,11 +14,14 @@ import { UserService } from 'src/app/services/user.service';
 export class UserCrudComponent implements AfterViewInit, OnInit{
 
   userList: UserCrud[] = [];
-  displayedColumns: string[] = ['id', 'userName', 'email', 'password', 'acciones'];
+  displayedColumns: string[] = ['id', 'userName', 'email', 'acciones'];
 
   //Edit Card
-  isCardVisible: boolean = false;
-  //dataSource = new MatTableDataSource<UserCrud>(USER_DATA);
+  isEditionCardVisible: boolean = false;
+
+  //Deletion Card
+  isDeletionCardVisible: boolean = false;
+
   dataSource = new MatTableDataSource<UserCrud>([]);
   selectedUser: UserCrud = { id: 0, userName: '', email: '', password: '' };
   
@@ -44,8 +47,12 @@ export class UserCrudComponent implements AfterViewInit, OnInit{
     this.dataSource.paginator = this.paginator;
   }
 
-  toggleCardVisibility() {
-    this.isCardVisible = !this.isCardVisible;
+  toggleEditionCardVisibility() {
+    this.isEditionCardVisible = !this.isEditionCardVisible;
+  }
+
+  toggleDeletionCardVisibility() {
+    this.isDeletionCardVisible = !this.isDeletionCardVisible;
   }
 
   editUser(user: UserCrud) {
@@ -69,8 +76,16 @@ export class UserCrudComponent implements AfterViewInit, OnInit{
   }
   
   deleteUser() {
-    this.userService.delete(this.selectedUser.id);
-    this.selectedUser = { id: 0, userName: '', email: '', password: '' };
+    this.userService.delete(this.selectedUser.id).subscribe(
+      () => {
+        console.log('Usuario eliminado exitosamente');
+        this.selectedUser = { id: 0, userName: '', email: '', password: '' };
+        location.reload();
+      },
+      error => {
+        console.log('Error al eliminar al usuario: ', error);
+      }
+    )
   }
 
 }
