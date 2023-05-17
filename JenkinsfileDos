@@ -21,7 +21,10 @@ pipeline {
                     if (out.isEmpty()) {
                         echo 'No se encontraron contenedores de frontend encendidos'
                     } else {
-                        bat 'cmd /c "FOR /f %%i IN (' + "'" + out + "'" + ') DO docker stop %%i"'
+                        def containerIds = out.split('\\r?\\n')
+                        containerIds.each { containerId ->
+                            bat "docker stop ${containerId}"
+                        }
                     }
                 }
             }
