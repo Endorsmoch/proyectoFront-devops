@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Ejecutar Test Cases') {
             steps {
-                bat 'npm test --no-watch'
+                bat '"test:ci": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox && echo 'hello'",'
             }
         }
     }
