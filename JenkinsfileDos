@@ -12,18 +12,9 @@ pipeline {
     }
 
     stages {
-        stage('Shutdown Containers') {
+        stage('Detener contenedores') {
             steps {
-                script {
-                    def containerCount = powershell(script: 'docker ps -aq --filter "name=frontend" | Measure-Object -Line | Select-Object -ExpandProperty Lines', returnStdout: true).trim()
-                    if (containerCount.toInteger() > 0) {
-                        // Hay contenedores con "frontend" en su nombre, se apagan
-                        bat 'docker stop $(docker ps -aq --filter "name=frontend")'
-                    } else {
-                        // No se encontraron contenedores, no se hace nada
-                        echo "No se encontraron contenedores con el nombre 'frontend'"
-                    }
-                }
+                bat 'docker ps -a --filter "name=frontend" --format "{{.Names}}" | ForEach-Object { docker stop $_ }'
             }
         }
         stage('Construir Imagen') {
