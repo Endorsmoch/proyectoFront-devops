@@ -20,8 +20,8 @@ pipeline {
                     IF "%containers%" == "" (
                         echo No hay contenedores por detener
                     ) ELSE (
-                        FOR /F "tokens=*" %G IN (containers.txt) DO (
-                            docker stop %G
+                        FOR /F "tokens=*" %%G IN (containers.txt) DO (
+                            docker stop %%G
                         )
                     )
                 '''
