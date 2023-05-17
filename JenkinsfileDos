@@ -25,6 +25,7 @@ pipeline {
                 }
             }
         }
+
         stage('Construir Imagen') {
             steps {
                 bat "docker build -t store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes} ."
