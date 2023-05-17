@@ -15,11 +15,12 @@ pipeline {
         stage('Detener contenedores') {
             steps {
                 script {
-                    def containerList = bat(returnStdout: true, script: 'docker ps -a --filter "name=frontend"').trim()
-                    if (containerList.contains("NAMES")) {
-                        bat 'for /f "skip=1 tokens=1" %%c in (\'docker ps -a --filter "name=frontend" --format "{{.Names}}"\') do docker stop %%c'
+                    def contenedores = bat(returnStdout: true, script: 'docker ps -a --filter "name=frontend" --format "{{.Names}}"').trim()
+                    
+                    if (contenedores) {
+                        bat 'for /f "tokens=1" %%c in (\'docker ps -a --filter "name=frontend" --format "{{.Names}}"\') do docker stop %%c'
                     } else {
-                        echo 'No hay contenedores para detener.'
+                        echo 'No hay contenedores por detener'
                     }
                 }
             }
