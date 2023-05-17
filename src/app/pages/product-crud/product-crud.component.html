@@ -83,18 +83,23 @@
         <mat-card-content>
           <form class="example-form">
             <mat-form-field>
+              Nombre
               <input matInput placeholder="Nombre del producto" [(ngModel)]="selectedProduct.name" name="name">
             </mat-form-field>
             <mat-form-field>
+              Descripción
               <input matInput placeholder="Descripción del producto" [(ngModel)]="selectedProduct.description" name="description">      
             </mat-form-field>
             <mat-form-field>
+                Fabricante
                 <input matInput placeholder="Fabricante" [(ngModel)]="selectedProduct.manufacturer" name="manufacturer">      
             </mat-form-field>
             <mat-form-field>
+                Precio
                 <input matInput placeholder="Precio" [(ngModel)]="selectedProduct.price" name="price">      
             </mat-form-field>
             <mat-form-field>
+                Stock
                 <input matInput placeholder="Stock" [(ngModel)]="selectedProduct.stock" name="stock">      
             </mat-form-field>
             <div class="card-actions">
@@ -113,18 +118,23 @@
         <mat-card-content>
           <form class="example-form">
             <mat-form-field>
+              Nombre
               <input matInput placeholder="Nombre del producto" [(ngModel)]="selectedProduct.name" name="name">
             </mat-form-field>
             <mat-form-field>
+              Descripción
               <input matInput placeholder="Descripción del producto" [(ngModel)]="selectedProduct.description" name="description">      
             </mat-form-field>
             <mat-form-field>
+                Fabricante
                 <input matInput placeholder="Fabricante" [(ngModel)]="selectedProduct.manufacturer" name="manufacturer">      
             </mat-form-field>
             <mat-form-field>
+                Precio
                 <input matInput placeholder="Precio" [(ngModel)]="selectedProduct.price" name="price">      
             </mat-form-field>
             <mat-form-field>
+                Stock
                 <input matInput placeholder="Stock" [(ngModel)]="selectedProduct.stock" name="stock">      
             </mat-form-field>
             <div class="card-actions">
@@ -141,15 +151,11 @@
           <mat-card-title>¿Seguro que deseas eliminar el siguiente producto?</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form class="example-form">
-            <mat-form-field>
-              <input matInput placeholder="Nombre del producto" [(ngModel)]="selectedProduct.name" name="name">
-            </mat-form-field>
-            <div class="card-actions">
-              <button mat-raised-button class="confirm-button" (click)="deleteProduct(); toggleDeletionCardVisibility()">Eliminar Producto</button>
-              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
-            </div>
-          </form>
+          <h1>{{selectedProduct.name}}</h1>
+          <div class="card-actions">
+            <button mat-raised-button class="confirm-button" (click)="deleteProduct(); toggleDeletionCardVisibility()">Eliminar Producto</button>
+            <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
+          </div>
         </mat-card-content>
       </mat-card>
 
