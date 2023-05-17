@@ -83,16 +83,20 @@
         <mat-card-content>
           <form class="example-form">
             <mat-form-field>
+              ID Producto
               <input matInput placeholder="ID Producto" [(ngModel)]="selectedComment.idProduct" name="idProduct">
             </mat-form-field>
             <mat-form-field>
+              ID Usuario
               <input matInput placeholder="ID Usuario" [(ngModel)]="selectedComment.idUser" name="idUser">      
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Texto" [(ngModel)]="selectedComment.text" name="text">      
+              Texto
+              <input matInput placeholder="Texto" [(ngModel)]="selectedComment.text" name="text">      
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Likes" [(ngModel)]="selectedComment.likes" name="likes">      
+              Likes
+              <input matInput placeholder="Likes" [(ngModel)]="selectedComment.likes" name="likes">      
             </mat-form-field>
             <div class="card-actions">
               <button mat-raised-button class="confirm-button" (click)="saveChanges(); toggleEditionCardVisibility()">Guardar cambios</button>
@@ -110,17 +114,21 @@
         <mat-card-content>
           <form class="example-form">
             <mat-form-field>
-                <input matInput placeholder="ID Producto" [(ngModel)]="selectedComment.idProduct" name="idProduct">
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput placeholder="ID Usuario" [(ngModel)]="selectedComment.idUser" name="idUser">      
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Texto" [(ngModel)]="selectedComment.text" name="text">      
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Likes" [(ngModel)]="selectedComment.likes" name="likes">      
-              </mat-form-field>
+              ID Producto
+              <input matInput placeholder="ID Producto" [(ngModel)]="selectedComment.idProduct" name="idProduct">
+            </mat-form-field>
+            <mat-form-field>
+              ID Usuario
+              <input matInput placeholder="ID Usuario" [(ngModel)]="selectedComment.idUser" name="idUser">      
+            </mat-form-field>
+            <mat-form-field>
+              Texto
+              <input matInput placeholder="Texto" [(ngModel)]="selectedComment.text" name="text">      
+            </mat-form-field>
+            <mat-form-field>
+              Likes
+              <input matInput placeholder="Likes" [(ngModel)]="selectedComment.likes" name="likes">      
+            </mat-form-field>
             <div class="card-actions">
               <button mat-raised-button class="confirm-button" (click)="createComment(); toggleCreationCardVisibility()">Crear Comentario</button>
               <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleCreationCardVisibility()">Cancelar</button>
@@ -135,15 +143,11 @@
           <mat-card-title>¿Seguro que deseas eliminar el siguiente comentario?</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form class="example-form">
-            <mat-form-field>
-              <input matInput placeholder="Texto" [(ngModel)]="selectedComment.text" name="text">
-            </mat-form-field>
-            <div class="card-actions">
-              <button mat-raised-button class="confirm-button" (click)="deleteComment(); toggleDeletionCardVisibility()">Eliminar Comentario</button>
-              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
-            </div>
-          </form>
+          <h2>ID Producto: {{selectedComment.idProduct}}, ID Usuario: {{selectedComment.idUser}}, Comentario: {{selectedComment.text}}  </h2>
+          <div class="card-actions">
+            <button mat-raised-button class="confirm-button" (click)="deleteComment(); toggleDeletionCardVisibility()">Eliminar Comentario</button>
+            <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
+          </div>
         </mat-card-content>
       </mat-card>
 

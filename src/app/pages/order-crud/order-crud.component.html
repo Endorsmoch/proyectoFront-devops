@@ -83,15 +83,19 @@
         <mat-card-content>
           <form class="example-form">
             <mat-form-field>
+              ID Usuario
               <input matInput placeholder="ID Usuario" [(ngModel)]="selectedOrder.idUser" name="idUser">      
             </mat-form-field>
             <mat-form-field>
+              ID Producto
                 <input matInput placeholder="ID Producto" [(ngModel)]="selectedOrder.idProduct" name="idProduct">
             </mat-form-field>
             <mat-form-field>
+              Cantidad
                 <input matInput placeholder="Cantidad" [(ngModel)]="selectedOrder.amount" name="amount">      
             </mat-form-field>
             <mat-form-field>
+              Método de pago
                 <input matInput placeholder="Método de pago" [(ngModel)]="selectedOrder.paymentMethod" name="paymentMethod">      
             </mat-form-field>
             <div class="card-actions">
@@ -110,17 +114,21 @@
         <mat-card-content>
           <form class="example-form">
             <mat-form-field>
-                <input matInput placeholder="ID Usuario" [(ngModel)]="selectedOrder.idUser" name="idUser">      
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="ID Producto" [(ngModel)]="selectedOrder.idProduct" name="idProduct">
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Cantidad" [(ngModel)]="selectedOrder.amount" name="amount">      
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Método de pago" [(ngModel)]="selectedOrder.paymentMethod" name="paymentMethod">      
-              </mat-form-field>
+              ID Usuario
+              <input matInput placeholder="ID Usuario" [(ngModel)]="selectedOrder.idUser" name="idUser">      
+            </mat-form-field>
+            <mat-form-field>
+              ID Producto
+                <input matInput placeholder="ID Producto" [(ngModel)]="selectedOrder.idProduct" name="idProduct">
+            </mat-form-field>
+            <mat-form-field>
+              Cantidad
+                <input matInput placeholder="Cantidad" [(ngModel)]="selectedOrder.amount" name="amount">      
+            </mat-form-field>
+            <mat-form-field>
+              Método de pago
+                <input matInput placeholder="Método de pago" [(ngModel)]="selectedOrder.paymentMethod" name="paymentMethod">      
+            </mat-form-field>
             <div class="card-actions">
               <button mat-raised-button class="confirm-button" (click)="createOrder(); toggleCreationCardVisibility()">Crear Orden</button>
               <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleCreationCardVisibility()">Cancelar</button>
@@ -135,21 +143,11 @@
           <mat-card-title>¿Seguro que deseas eliminar la siguiente orden?</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form class="example-form">
-            <mat-form-field>
-              <input matInput placeholder="ID User" [(ngModel)]="selectedOrder.idUser" name="idUser">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="ID Product" [(ngModel)]="selectedOrder.idProduct" name="idProduct">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Cantidad" [(ngModel)]="selectedOrder.amount" name="amount">
-            </mat-form-field>
-            <div class="card-actions">
-              <button mat-raised-button class="confirm-button" (click)="deleteOrder(); toggleDeletionCardVisibility()">Eliminar Orden</button>
-              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
-            </div>
-          </form>
+          <h2>Orden: {{selectedOrder.id}}, Usuario: {{selectedOrder.idUser}}, Producto: {{selectedOrder.idProduct}}, Cantidad: {{selectedOrder.amount}}</h2>
+          <div class="card-actions">
+            <button mat-raised-button class="confirm-button" (click)="deleteOrder(); toggleDeletionCardVisibility()">Eliminar Orden</button>
+            <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
+          </div>
         </mat-card-content>
       </mat-card>
 
