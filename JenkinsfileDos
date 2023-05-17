@@ -15,7 +15,8 @@ pipeline {
         stage('Detener Contenedores') {
             steps {
                 script {
-                    def out = bat(script: 'docker ps -q --filter "name=store-frontend-1.0.0-"', returnStdout: true).trim()
+                    def filter = 'name=store-frontend-1.0.0-'
+                    def out = bat(script: "docker ps -q --filter \"${filter}\"", returnStdout: true).trim()
                     
                     if (out.isEmpty()) {
                         echo 'No se encontraron contenedores de frontend encendidos'
