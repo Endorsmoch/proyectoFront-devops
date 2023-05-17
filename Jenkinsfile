@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Test Cases') {
             steps {
-                bat 'npm run test'
+                bat 'ng test'
             }
         }
         stage('Compilar proyecto') {
