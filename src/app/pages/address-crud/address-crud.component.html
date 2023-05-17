@@ -9,11 +9,11 @@
         </a>
     </mat-toolbar>
 
-    <div class="mat-elevation-z8">
+    <div class="table-container mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
       
           <!-- ID Column -->
-          <ng-container matColumnDef="id">
+          <ng-container matColumnDef="id" sticky>
             <th mat-header-cell *matHeaderCellDef> ID </th>
             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
           </ng-container>
@@ -61,7 +61,7 @@
           </ng-container>
 
           <!-- Options Column -->
-          <ng-container matColumnDef="acciones">
+          <ng-container matColumnDef="acciones" stickyEnd>
             <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let element">
               <a class="pointer" matTooltip="Editar datos de dirección" (click)="editAddress(element); toggleEditionCardVisibility()">
@@ -80,12 +80,11 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-      
-        <mat-paginator [pageSizeOptions]="[5, 10]"
+      </div>
+      <mat-paginator [pageSizeOptions]="[5, 10]"
                        showFirstLastButtons
                        aria-label="Seleccione la página de Direcciones">
-        </mat-paginator>
-      </div>
+      </mat-paginator>
       
       <!-- Formulario de edición -->
       <mat-card *ngIf="isEditionCardVisible">
