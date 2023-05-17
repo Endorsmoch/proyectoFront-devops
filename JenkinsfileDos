@@ -20,7 +20,7 @@ pipeline {
                     if (out.isEmpty()) {
                         echo 'No se encontraron contenedores de frontend encendidos'
                     } else {
-                        bat "FOR /f \"tokens=*\" %%i IN ('echo ${out}') DO docker stop %%i"
+                        bat "cmd /c FOR /f \"tokens=*\" %%i IN (\"${out}\") DO docker stop %%i"
                     }
                 }
             }
