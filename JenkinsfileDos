@@ -23,7 +23,7 @@ pipeline {
                     } else {
                         def containerIds = out.split('\\r?\\n')
                         containerIds.each { containerId ->
-                            bat "docker stop ${containerId}"
+                            bat "docker stop ${containerId.trim()}"
                         }
                     }
                 }
