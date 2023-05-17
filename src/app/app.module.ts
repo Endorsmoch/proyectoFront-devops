@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 //My components
 import { RegisterComponent } from './pages/register/register.component';
@@ -30,6 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -62,7 +64,9 @@ import {MatCardModule} from '@angular/material/card';
     MatFormFieldModule,
     MatCardModule,
     ReactiveFormsModule,
-    FormsModule
+    MatMenuModule,
+    FormsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

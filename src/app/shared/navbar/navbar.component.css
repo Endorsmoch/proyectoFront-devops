@@ -1,8 +1,28 @@
-.example-spacer {
-    flex: 1 1 auto;
-}
 
 .body{
     background-color: #2C3E50;
     color: white;
+    overflow: auto;
+
+} 
+
+.spacer {
+    margin-left: 190px;
 }
+.spacer-small {
+    flex: 1 1 auto;
+}
+
+th{
+    align-items:center ;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+}
+
+
