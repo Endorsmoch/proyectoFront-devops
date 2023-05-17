@@ -2,15 +2,15 @@ pipeline {
     agent any
     
     stages {
+        stage('Ejecutar Test Cases') {
+            steps {
+                bat 'ng test'
+            }
+        }
         stage('Compilar proyecto') {
             steps {
                 bat 'npm install'
                 bat 'npm run build --prod'
-            }
-        }
-        stage('Ejecutar Test Cases') {
-            steps {
-                bat 'npm test --watch=false --browsers=ChromeHeadlessNoSandbox'
             }
         }
     }
