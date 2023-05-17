@@ -5,6 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { of } from 'rxjs';
 import { NavbarComponent } from './navbar.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -14,7 +15,7 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],
-      imports: [RouterTestingModule, HttpClientTestingModule, MatToolbarModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, MatToolbarModule, MatMenuModule],
       providers: [AuthService]
     }).compileComponents();
 
