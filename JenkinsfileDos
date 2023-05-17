@@ -12,7 +12,7 @@ pipeline {
     }
 
     stages {
-        stage('Detener contenedor frontend') {
+        stage('Detener contenedores') {
             steps {
                 bat '''
                     SETLOCAL EnableDelayedExpansion
@@ -33,7 +33,7 @@ pipeline {
                             docker stop %%B
                         )
                     ) ELSE (
-                        echo Hay múltiples contenedores que cumplen la condición
+                        echo No hay contenedores frontend por detener
                     )
                 '''
             }
