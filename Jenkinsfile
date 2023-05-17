@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Test Cases') {
             steps {
-                bat 'ng test'
+                bat 'ng test --browsers=ChromeHeadless --watch=false'
             }
         }
         stage('Compilar proyecto') {
