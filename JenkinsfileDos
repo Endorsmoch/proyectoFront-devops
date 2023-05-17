@@ -15,13 +15,13 @@ pipeline {
         stage('Detener Contenedores') {
             steps {
                 script {
-                    def result = bat(script: 'docker ps -q --filter "name=store-frontend-1.0.0-"', returnStatus: true)
+                    def out = bat(script: 'docker ps -q --filter "name=store-frontend-1.0.0-"', returnStdout: true).trim()
                     
-                    if (result == 0) {
+                    if (out.isEmpty()) {
                         echo 'No se encontraron contenedores de frontend encendidos'
-                    } else if (result == 1) {
-                        bat 'FOR /f "tokens=*" %%i IN (\'docker ps -q --filter "name=store-frontend-1.0.0-" \') DO docker stop %%i'
-                    } 
+                    } else {
+                        bat "FOR /f \"tokens=*\" %%i IN ('echo ${out}') DO docker stop %%i"
+                    }
                 }
             }
         }
