@@ -12,17 +12,19 @@ pipeline {
     }
 
     stages {
-        stage('Detener contenedores') {
+        stage('Detener contenedor frontend') {
             steps {
-                script {
-                    def contenedores = bat(returnStdout: true, script: 'docker ps -a --filter "name=frontend" --format "{{.Names}}"').trim()
-                    
-                    if (contenedores) {
-                        bat 'for /f "tokens=1" %%c in (\'docker ps -a --filter "name=frontend" --format "{{.Names}}"\') do docker stop %%c'
-                    } else {
-                        echo 'No hay contenedores por detener'
-                    }
-                }
+                bat '''
+                    docker ps -a --filter "name=frontend" --format "{{.Names}}" > containers.txt
+                    SET /p containers=<containers.txt
+                    IF "%containers%" == "" (
+                        echo No hay contenedores por detener
+                    ) ELSE (
+                        FOR /F "tokens=*" %%G IN (containers.txt) DO (
+                            docker stop %%G
+                        )
+                    )
+                '''
             }
         }
         stage('Construir Imagen') {
