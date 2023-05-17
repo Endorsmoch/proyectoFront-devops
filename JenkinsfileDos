@@ -16,15 +16,12 @@ pipeline {
             steps {
                 script {
                     def filter = 'name=store-frontend-1.0.0-'
-                    def out = bat(script: "docker ps -q --filter \"${filter}\"", returnStdout: true).trim()
+                    def out = bat(script: 'docker ps -q --filter "name=store-frontend-1.0.0-"', returnStdout: true).trim()
                     
                     if (out.isEmpty()) {
                         echo 'No se encontraron contenedores de frontend encendidos'
                     } else {
-                        def containerIds = out.split('\\r?\\n')
-                        containerIds.each { containerId ->
-                            bat "docker stop ${containerId.trim()}"
-                        }
+                        bat "cmd /c FOR /F %%i IN ('echo ${out}') DO docker stop %%i"
                     }
                 }
             }
