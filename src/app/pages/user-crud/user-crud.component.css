@@ -17,6 +17,24 @@ table {
      color: rgb(30, 30, 155);
 }
 
+.confirm-button {
+    color: white;
+    background-color: rgb(30, 30, 155);
+    margin-right: 10px;
+}
+
+.cancel-button {
+    color: rgb(184, 4, 4);
+}
+
 .pointer {
     cursor: pointer;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+th {
+    width: 25%;
 }

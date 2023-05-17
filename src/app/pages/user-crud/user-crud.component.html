@@ -24,22 +24,16 @@
             <td mat-cell *matCellDef="let element"> {{element.email}} </td>
           </ng-container>
       
-          <!-- Password Column -->
-          <ng-container matColumnDef="password">
-            <th mat-header-cell *matHeaderCellDef> Contraseña </th>
-            <td mat-cell *matCellDef="let element"> {{element.password}} </td>
-          </ng-container>
-
           <!-- Options Column -->
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let element">
-              <a class="pointer" matTooltip="Editar datos de usuario" (click)="editUser(element); toggleCardVisibility()">
+              <a class="pointer" matTooltip="Editar datos de usuario" (click)="editUser(element); toggleEditionCardVisibility()">
                 <mat-icon class="blue-icon">
                   edit
                 </mat-icon>
               </a>
-              <a class="pointer" matTooltip="Eliminar usuario" (click)="editUser(element); deleteUser()">
+              <a class="pointer" matTooltip="Eliminar usuario" (click)="editUser(element); toggleDeletionCardVisibility()">
                 <mat-icon class="red-icon">
                   delete
                 </mat-icon>
@@ -58,7 +52,7 @@
       </div>
       
       <!-- Formulario de edición -->
-      <mat-card *ngIf="isCardVisible">
+      <mat-card *ngIf="isEditionCardVisible">
         <mat-card-header>
           <mat-card-title>Editar usuario</mat-card-title>
         </mat-card-header>
@@ -71,8 +65,26 @@
               <input matInput placeholder="Correo electrónico" [(ngModel)]="selectedUser.email" name="email">      
             </mat-form-field>
             <div class="card-actions">
-              <button mat-raised-button color="primary" (click)="saveChanges(); toggleCardVisibility()">Guardar cambios</button>
-              <button mat-raised-button color="accent" (click)="cancelEdit(); toggleCardVisibility()">Cancelar</button>
+              <button mat-raised-button class="confirm-button" (click)="saveChanges(); toggleEditionCardVisibility()">Guardar cambios</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleEditionCardVisibility()">Cancelar</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Carta de eliminación -->
+      <mat-card *ngIf="isDeletionCardVisible">
+        <mat-card-header>
+          <mat-card-title>¿Seguro que deseas eliminar al siguiente usuario?</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="example-form">
+            <mat-form-field>
+              <input matInput placeholder="Nombre del usuario" [(ngModel)]="selectedUser.userName" name="userName">
+            </mat-form-field>
+            <div class="card-actions">
+              <button mat-raised-button class="confirm-button" (click)="deleteUser(); toggleDeletionCardVisibility()">Eliminar Usuario</button>
+              <button mat-raised-button class="cancel-button" (click)="cancelEdit(); toggleDeletionCardVisibility()">Cancelar</button>
             </div>
           </form>
         </mat-card-content>
