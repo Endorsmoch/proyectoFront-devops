@@ -18,7 +18,7 @@ pipeline {
                     def result = bat(script: 'docker ps -q --filter "name=store-frontend-1.0.0-"', returnStatus: true)
                     
                     if (result == 0) {
-                        echo 'No se encontraron contenedores de Docker encendidos. No se realizará ninguna acción.'
+                        echo 'No se encontraron contenedores de frontend encendidos'
                     } else if (result == 1) {
                         bat 'FOR /f "tokens=*" %%i IN (\'docker ps -q --filter "name=store-frontend-1.0.0-" \') DO docker stop %%i'
                     } 
