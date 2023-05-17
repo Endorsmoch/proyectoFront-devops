@@ -7,7 +7,12 @@ pipeline {
                 bat 'npm install'
                 bat 'npm run build --prod'
             }
-        } 
+        }
+        stage('Ejecutar Test Cases') {
+            steps {
+                bat 'ng test'
+            }
+        }
     }
 
     post {
