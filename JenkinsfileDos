@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Detener contenedores') {
             steps {
-                bat 'docker ps -a --filter "name=frontend" --format "{{.Names}}" | ForEach-Object { docker stop $_ }'
+                bat 'for /f "tokens=1" %c in (\'docker ps -a --filter "name=frontend" --format "{{.Names}}"\') do docker stop %c'
             }
         }
         stage('Construir Imagen') {
