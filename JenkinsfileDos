@@ -22,8 +22,10 @@ pipeline {
                     // Ruta completa al archivo pscp.exe con barra invertida duplicada
                     def pscpPath = 'C:/pscp.exe'
 
+                    bat('echo %cd%')
+                    bat('dir')
                     // Comando para establecer la conexión SSH y ejecutar los comandos
-                    def sshCommandFull = "dir;${pscpPath} -pw ${sshPassword} -r ${env.DIST_PATH} ${sshUser}@${vmIP}:../../var/www/html/devops_web/"
+                    def sshCommandFull = "${pscpPath} -pw ${sshPassword} -r ${env.DIST_PATH} ${sshUser}@${vmIP}:../../var/www/html/devops_web/"
 
                     bat(sshCommandFull)
                 }
