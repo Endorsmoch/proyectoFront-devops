@@ -13,16 +13,16 @@ pipeline {
           def sshPassword = 'ubuntu'
 
           // Comando para ejecutar en la máquina virtual
-          def sshCommand = 'cd ..; cd ..; cd /var/www/html; sudo su; git clone https://github.com/Endorsmoch/proyectoFront-devops.git'
+          def sshCommand = 'sudo -u ubuntu git -C /var/www/html pull origin devops/Front-23'
 
-          // Ruta completa al archivo plink.exe con barra invertida duplicada
+          // Ruta completa al archivo plink.exe
           def plinkPath = 'C:/plink.exe'
 
           // Huella digital del servidor SSH
           def hostKey = 'ssh-ed25519 255 SHA256:V4rGl41cT7XvnrAFEE+wPLvrONJp6uCabSN1oBFVtdc'
 
-          // Comando para establecer la conexión SSH y ejecutar los comandos, incluyendo la opción -hostkey
-          def sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
+          // Comando para establecer la conexión SSH y ejecutar los comandos, incluyendo la opción -hostkey y el usuario especificado
+          def sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" -batch -t \"${sshCommand}\""
 
           bat(sshCommandFull)
         }
@@ -30,66 +30,3 @@ pipeline {
     }
   }
 }
-
-
-// pipeline {
-//     agent any
-
-//     parameters {
-//         string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
-//     }
-
-//     environment {
-//         BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
-//         buildNumber = "${params.BUILD_NUMBER}"
-//         buildNumberWithoutQuotes = buildNumber.replace("'", "")
-//     }
-
-//     stages {
-//         stage('Detener contenedores') {
-//             steps {
-//                 bat '''
-//                     SETLOCAL EnableDelayedExpansion
-//                     SET "contenedores="
-
-//                     FOR /F "tokens=*" %%A IN ('docker ps --filter "name=frontend" --format "{{.Names}}"') DO (
-//                         SET "contenedores=!contenedores! %%A"
-//                     )
-
-//                     SET contadoresCount=0
-//                     FOR %%B IN (!contenedores!) DO (
-//                         SET /A contadoresCount+=1
-//                     )
-
-//                     IF !contadoresCount! equ 1 (
-//                         echo Solo hay un contenedor por detener
-//                         FOR %%B IN (!contenedores!) DO (
-//                             docker stop %%B
-//                         )
-//                     ) ELSE (
-//                         echo No hay contenedores frontend por detener
-//                     )
-//                 '''
-//             }
-//         }
-//         stage('Construir Imagen') {
-//             steps {
-//                 bat "docker build -t store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes} ."
-//             }
-//         }
-//         stage('Desplegar Imagen') {
-//             steps {
-//                 bat "docker run -d -p 8081:80 --name store-frontend-1.0.0-${buildNumberWithoutQuotes} --network=store-devops-network store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes}"
-//             }
-//         }
-//     }
-
-//     post {
-//         success {
-//             echo '¡El segundo pipeline se ha completado exitosamente!'
-//         }
-//         failure {
-//             echo 'El segundo pipeline ha fallado!'
-//         }
-//     }
-// }
