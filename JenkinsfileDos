@@ -9,24 +9,28 @@ pipeline {
           def vmIP = '192.168.0.26'
           // Nombre de usuario para la conexión SSH
           def sshUser = 'ubuntu'
-          // Ruta de la clave privada SSH en Jenkins
-          def sshKeyPath = '/ruta/a/clave-privada-ssh'
-          bat 'sshpass -p ubuntu ssh ubuntu@192.168.0.26'
-          bat 'ls'
-          //"cd ..; cd..; cd /var/www/html; git pull origin devops/Front-23"'
+          // Contraseña para la conexión SSH
+          def sshPassword = 'ubuntu'
 
-          // Conexión SSH y ejecución de comandos en la máquina virtual
-        //   sshCommand remote: sshUser + '@' + vmIP, command: """
-        //     # Comandos que deseas ejecutar en la máquina virtual
-        //     echo 'Hola desde la máquina virtual'
-        //     ls -la /ruta/de/tu/proyecto
-        //     sudo systemctl restart nginx
-        //   """, keyFile: sshKeyPath
+          // Comando para ejecutar en la máquina virtual
+          def sshCommand = 'cd ..; cd ..; cd /var/www/html; git pull origin devops/Front-23'
+
+          // Ruta completa al archivo plink.exe con barra invertida duplicada
+          def plinkPath = 'C:/plink.exe'
+
+          // Huella digital del servidor SSH
+          def hostKey = 'ssh-ed25519 255 SHA256:V4rGl41cT7XvnrAFEE+wPLvrONJp6uCabSN1oBFVtdc'
+
+          // Comando para establecer la conexión SSH y ejecutar los comandos, incluyendo la opción -hostkey
+          def sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
+
+          bat(sshCommandFull)
         }
       }
     }
   }
 }
+
 
 // pipeline {
 //     agent any
