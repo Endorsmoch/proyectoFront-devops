@@ -13,6 +13,11 @@ pipeline {
         //         //bat 'ng test --browsers=ChromeHeadless --watch=false'
         //     }
         // }
+        stage('Archive Artifact') {
+            steps {
+                archiveArtifacts artifacts: 'dist/', fingerprint: true
+            }
+        }
     }
 
     post {
