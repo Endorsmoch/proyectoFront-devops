@@ -1,61 +1,91 @@
 pipeline {
-    agent any
+  agent any
 
-    parameters {
-        string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
+  stages {
+    stage('Conexión SSH y comandos en la máquina virtual') {
+      steps {
+        script {
+          // Dirección IP de la máquina virtual
+          def vmIP = '192.168.0.26'
+          // Nombre de usuario para la conexión SSH
+          def sshUser = 'ubuntu'
+          // Ruta de la clave privada SSH en Jenkins
+          def sshKeyPath = '/ruta/a/clave-privada-ssh'
+          bat 'sshpass -p ubuntu ssh ubuntu@192.168.0.26'
+          bat 'ls'
+          //"cd ..; cd..; cd /var/www/html; git pull origin devops/Front-23"'
+
+          // Conexión SSH y ejecución de comandos en la máquina virtual
+        //   sshCommand remote: sshUser + '@' + vmIP, command: """
+        //     # Comandos que deseas ejecutar en la máquina virtual
+        //     echo 'Hola desde la máquina virtual'
+        //     ls -la /ruta/de/tu/proyecto
+        //     sudo systemctl restart nginx
+        //   """, keyFile: sshKeyPath
+        }
+      }
     }
-
-    environment {
-        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
-        buildNumber = "${params.BUILD_NUMBER}"
-        buildNumberWithoutQuotes = buildNumber.replace("'", "")
-    }
-
-    stages {
-        stage('Detener contenedores') {
-            steps {
-                bat '''
-                    SETLOCAL EnableDelayedExpansion
-                    SET "contenedores="
-
-                    FOR /F "tokens=*" %%A IN ('docker ps --filter "name=frontend" --format "{{.Names}}"') DO (
-                        SET "contenedores=!contenedores! %%A"
-                    )
-
-                    SET contadoresCount=0
-                    FOR %%B IN (!contenedores!) DO (
-                        SET /A contadoresCount+=1
-                    )
-
-                    IF !contadoresCount! equ 1 (
-                        echo Solo hay un contenedor por detener
-                        FOR %%B IN (!contenedores!) DO (
-                            docker stop %%B
-                        )
-                    ) ELSE (
-                        echo No hay contenedores frontend por detener
-                    )
-                '''
-            }
-        }
-        stage('Construir Imagen') {
-            steps {
-                bat "docker build -t store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes} ."
-            }
-        }
-        stage('Desplegar Imagen') {
-            steps {
-                bat "docker run -d -p 8081:80 --name store-frontend-1.0.0-${buildNumberWithoutQuotes} --network=store-devops-network store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes}"
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '¡El segundo pipeline se ha completado exitosamente!'
-        }
-        failure {
-            echo 'El segundo pipeline ha fallado!'
-        }
-    }
+  }
 }
+
+// pipeline {
+//     agent any
+
+//     parameters {
+//         string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
+//     }
+
+//     environment {
+//         BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+//         buildNumber = "${params.BUILD_NUMBER}"
+//         buildNumberWithoutQuotes = buildNumber.replace("'", "")
+//     }
+
+//     stages {
+//         stage('Detener contenedores') {
+//             steps {
+//                 bat '''
+//                     SETLOCAL EnableDelayedExpansion
+//                     SET "contenedores="
+
+//                     FOR /F "tokens=*" %%A IN ('docker ps --filter "name=frontend" --format "{{.Names}}"') DO (
+//                         SET "contenedores=!contenedores! %%A"
+//                     )
+
+//                     SET contadoresCount=0
+//                     FOR %%B IN (!contenedores!) DO (
+//                         SET /A contadoresCount+=1
+//                     )
+
+//                     IF !contadoresCount! equ 1 (
+//                         echo Solo hay un contenedor por detener
+//                         FOR %%B IN (!contenedores!) DO (
+//                             docker stop %%B
+//                         )
+//                     ) ELSE (
+//                         echo No hay contenedores frontend por detener
+//                     )
+//                 '''
+//             }
+//         }
+//         stage('Construir Imagen') {
+//             steps {
+//                 bat "docker build -t store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes} ."
+//             }
+//         }
+//         stage('Desplegar Imagen') {
+//             steps {
+//                 bat "docker run -d -p 8081:80 --name store-frontend-1.0.0-${buildNumberWithoutQuotes} --network=store-devops-network store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes}"
+//             }
+//         }
+//     }
+
+//     post {
+//         success {
+//             echo '¡El segundo pipeline se ha completado exitosamente!'
+//         }
+//         failure {
+//             echo 'El segundo pipeline ha fallado!'
+//         }
+//     }
+// }
