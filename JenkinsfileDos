@@ -31,8 +31,7 @@ pipeline {
 
           bat(sshCommandFull)
 
-          def scpCommand = "scp -r -o StrictHostKeyChecking=no ./* ${sshUser}@${vmIP}:/"
-            sshCommandFull = "${sshCommand}"
+            sshCommandFull = "scp -r -o StrictHostKeyChecking=no ./* ${sshUser}@${vmIP}:/"
           bat(sshCommandFull)
 
         }
