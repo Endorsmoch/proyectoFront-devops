@@ -30,7 +30,7 @@ pipeline {
           def sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
 
           bat(sshCommandFull)
-
+            sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
             sshCommand = "ls; scp -r -o StrictHostKeyChecking=no ${params.DIST_PATH} ${sshUser}@${vmIP}:/var/www/html/devops_web"
           bat(sshCommandFull)
 
