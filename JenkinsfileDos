@@ -18,7 +18,7 @@ pipeline {
           def sshPassword = 'ubuntu'
 
           // Comando para ejecutar en la máquina virtual
-            def sshCommand = 'cd ..; cd ..; cd /var/www/html; scp -r -o StrictHostKeyChecking=no dist/. ubuntu@192.168.0.26:/var/www/html'
+            def sshCommand = 'cd ..; cd ..; cd /var/www/html;'
 
           // Ruta completa al archivo plink.exe con barra invertida duplicada
           def plinkPath = 'C:/plink.exe'
@@ -30,6 +30,11 @@ pipeline {
           def sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
 
           bat(sshCommandFull)
+
+          sshCommand ='scp -r -o dist/.'
+            sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
+          bat(sshCommandFull)
+
         }
       }
     }
