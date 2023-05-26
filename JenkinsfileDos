@@ -1,41 +1,42 @@
 pipeline {
-    agent any
+  agent any
 
-    parameters {
-        string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
-        string(name: 'DIST_PATH', defaultValue: '', description: 'Ruta del directorio dist')
-    }
+  parameters {
+    string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
+    string(name: 'DIST_PATH', defaultValue: '', description: 'Ruta del directorio dist')
+}
 
-    stages {
-        stage('Conexión SSH y comandos en la máquina virtual') {
-            steps {
-                script {
-                    // Dirección IP de la máquina virtual
-                    def vmIP = '192.168.0.26'
-                    // Nombre de usuario para la conexión SSH
-                    def sshUser = 'ubuntu'
-                    // Contraseña para la conexión SSH
-                    def sshPassword = 'ubuntu'
+  stages {
+    stage('Conexión SSH y comandos en la máquina virtual') {
+      steps {
+        script {
+          // Dirección IP de la máquina virtual
+          def vmIP = '192.168.0.26'
+          // Nombre de usuario para la conexión SSH
+          def sshUser = 'ubuntu'
+          // Contraseña para la conexión SSH
+          def sshPassword = 'ubuntu'
 
-                    // Comando para ejecutar en la máquina virtual
-                    def sshCommand = "cd /var/www/html && scp -r -o StrictHostKeyChecking=no jenkins@<IP_JENKINS>:${params.DIST_PATH} ."
+          // Comando para ejecutar en la máquina virtual
+          def sshCommand = 'cd ..; cd ..; cd /var/www/html; scp -r -o StrictHostKeyChecking=no jenkins@<IP_JENKINS>:${params.DIST_PATH} .'
 
-                    // Ruta completa al archivo plink.exe con barra invertida duplicada
-                    def plinkPath = 'C:/plink.exe'
+          // Ruta completa al archivo plink.exe con barra invertida duplicada
+          def plinkPath = 'C:/plink.exe'
 
-                    // Huella digital del servidor SSH
-                    def hostKey = 'ssh-ed25519 255 SHA256:V4rGl41cT7XvnrAFEE+wPLvrONJp6uCabSN1oBFVtdc'
+          // Huella digital del servidor SSH
+          def hostKey = 'ssh-ed25519 255 SHA256:V4rGl41cT7XvnrAFEE+wPLvrONJp6uCabSN1oBFVtdc'
 
-                    // Comando para establecer la conexión SSH y ejecutar los comandos, incluyendo la opción -hostkey
-                    def sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
+          // Comando para establecer la conexión SSH y ejecutar los comandos, incluyendo la opción -hostkey
+          def sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
 
-                    bat(sshCommandFull)
-                }
-            }
+          bat(sshCommandFull)
         }
+      }
     }
+  }
 
-    post {
+
+  post {
         success {
             echo '¡El segundo pipeline se ha completado exitosamente!'
         }
@@ -44,3 +45,24 @@ pipeline {
         }
     }
 }
+
+
+// pipeline {
+//     agent any
+
+//     parameters {
+//         string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
+//     }
+
+//     environment {
+//         BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+//         buildNumber = "${params.BUILD_NUMBER}"
+//         buildNumberWithoutQuotes = buildNumber.replace("'", "")
+//     }
+
+//     
+
+//     
+
+
+// }
