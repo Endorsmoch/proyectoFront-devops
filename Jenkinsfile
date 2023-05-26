@@ -17,11 +17,15 @@ pipeline {
 
     post {
         success {
-            echo '¡El pipeline se ha completado exitosamente! Ejecutandose segundo pipeline...'
-            build job: 'FrontendStorePipeline2', parameters: [string(name: 'BUILD_NUMBER', value: "'$currentBuild.number'")]
+            echo '¡El pipeline se ha completado exitosamente! Ejecutando segundo pipeline...'
+            build job: 'FrontendStorePipeline2', parameters: [
+                string(name: 'BUILD_NUMBER', value: "$currentBuild.number"),
+                string(name: 'DIST_PATH', value: "dist/")
+            ]
         }
         failure {
             echo '¡El pipeline ha fallado!'
         }
     }
+
 }
