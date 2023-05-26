@@ -31,7 +31,7 @@ pipeline {
 
           bat(sshCommandFull)
 
-            sshCommandFull = "scp -r -o StrictHostKeyChecking=no ./* ${sshUser}@${vmIP}:/"
+            sshCommandFull = "scp -r -o StrictHostKeyChecking=no ${params.DIST_PATH} ${sshUser}@${vmIP}:/var/www/html"
           bat(sshCommandFull)
 
         }
