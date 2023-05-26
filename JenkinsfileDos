@@ -18,7 +18,7 @@ pipeline {
           def sshPassword = 'ubuntu'
 
           // Comando para ejecutar en la máquina virtual
-            def sshCommand = "cd ..; cd ..; cd /var/www/html/devops_web; pwd; scp -r -o StrictHostKeyChecking=no ${env.DIST_PATH} ${sshUser}@${vmIP}:/var/www/html/devops_web;"
+            def sshCommand = "cd ..; cd ..; cd /var/www/html/devops_web; pwd; scp -r -o StrictHostKeyChecking=no ${env.DIST_PATH} ${sshUser}@${vmIP}:/;"
 
           // Ruta completa al archivo plink.exe con barra invertida duplicada
           def plinkPath = 'C:/plink.exe'
