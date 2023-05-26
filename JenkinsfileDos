@@ -32,7 +32,7 @@ pipeline {
           bat(sshCommandFull)
 
           sshCommand ='scp -r -o dist/.'
-            sshCommandFull = "${plinkPath} -ssh ${sshUser}@${vmIP} -pw ${sshPassword} -hostkey \"${hostKey}\" ${sshCommand}"
+            sshCommandFull = "${sshCommand}"
           bat(sshCommandFull)
 
         }

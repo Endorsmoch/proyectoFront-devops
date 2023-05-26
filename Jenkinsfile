@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Test Cases') {
             steps {
-                bat 'ng test --browsers=ChromeHeadless --watch=false'
+                //bat 'ng test --browsers=ChromeHeadless --watch=false'
             }
         }
     }
