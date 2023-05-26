@@ -13,10 +13,10 @@ pipeline {
           def sshPassword = 'ubuntu'
 
           // Comando para ejecutar en la máquina virtual
-          def sshCommand = 'cd ..; cd ..; cd /var/www/html; echo "ubuntu" | sudo -S su;git pull origin devops/Front-23'
+          def sshCommand = 'cd ..; cd ..; cd /var/www/html; touch test.txt'
 
           // Ruta completa al archivo plink.exe con barra invertida duplicada
-          def plinkPath = 'C:\\plink.exe'
+          def plinkPath = 'C:/plink.exe'
 
           // Huella digital del servidor SSH
           def hostKey = 'ssh-ed25519 255 SHA256:V4rGl41cT7XvnrAFEE+wPLvrONJp6uCabSN1oBFVtdc'
