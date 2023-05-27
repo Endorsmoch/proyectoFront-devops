@@ -12,7 +12,7 @@ pipeline {
                 bat('echo %cd%')
                 bat('dir')
 
-                copyArtifacts(projectName: 'FrontendStorePipeline1', filter: 'dist/', fingerprintArtifacts: true)
+                copyArtifacts(projectName: 'FrontendStorePipeline1', filter: '${env.DIST_PATH}', fingerprintArtifacts: true)
             }
         }
         stage('Conexión SSH y transferencia de archivos') {
