@@ -7,14 +7,6 @@ pipeline {
     }
 
     stages {
-        //  stage('Copy Artifact') {
-        //     steps {
-        //         bat('echo %cd%')
-        //         bat('dir')
-        //         bat("echo ${env.DIST_PATH}")
-        //         copyArtifacts(projectName: 'FrontendStorePipeline1', filter: "${env.DIST_PATH}", fingerprintArtifacts: true)
-        //     }
-        // }
         stage('Conexión SSH y transferencia de archivos') {
             steps {
                 script {
@@ -32,10 +24,15 @@ pipeline {
 
                     bat('echo %cd%')
                     bat('dir')
+
                     // Comando para establecer la conexión SSH y ejecutar los comandos
                     def sshCommandFull = "${pscpPath} -pw ${sshPassword} -r ${env.DIST_PATH} ${sshUser}@${vmIP}:../../var/www/html/devops_web/"
 
-                    bat(sshCommandFull)
+                    // Agregar opción "-batch" para evitar la confirmación interactiva de la clave del host
+                    def sshCommandFullWithBatch = "${sshCommandFull} -batch"
+
+                    // Ejecutar el comando SSH
+                    bat(sshCommandFullWithBatch)
                 }
             }
         }
