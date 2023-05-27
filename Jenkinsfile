@@ -15,9 +15,6 @@ pipeline {
         // }
         stage('Archive Artifact') {
             steps {
-                bat('echo %cd%')
-                bat('dir')
-
                 archiveArtifacts artifacts: 'dist/', fingerprint: true
             }
         }
