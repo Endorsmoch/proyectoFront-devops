@@ -11,7 +11,7 @@ pipeline {
             steps {
                 bat('echo %cd%')
                 bat('dir')
-
+                bat('echo ${env.DIST_PATH}')
                 copyArtifacts(projectName: 'FrontendStorePipeline1', filter: '${env.DIST_PATH}', fingerprintArtifacts: true)
             }
         }
