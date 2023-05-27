@@ -25,7 +25,7 @@ pipeline {
                     def pscpPath = 'C:/pscp.exe'
 
                     // Comando para establecer la conexión SSH y ejecutar los comandos
-                    def sshCommandFull = "${pscpPath} -pw ${sshPassword} -r ${env.DIST_PATH} ${sshUser}@${vmIP}:../../var/www/html/devops_web/"
+                    def sshCommandFull = "${pscpPath} -pw ${sshPassword} ${env.DIST_PATH} ubuntu@${vmIP}:../../var/www/html/devops_web/"
 
                     // Agregar opción "-batch" para evitar la confirmación interactiva de la clave del host
                     def sshCommandFullWithBatch = "${sshCommandFull} -batch"
