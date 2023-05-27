@@ -26,10 +26,9 @@ pipeline {
     post {
         success {
             echo '¡El pipeline se ha completado exitosamente! Ejecutando segundo pipeline...'
-            def path = bat(script: 'echo %cd%', returnStdout: true).trim()
             build job: 'FrontendStorePipeline2', parameters: [
                 string(name: 'BUILD_NUMBER', value: "$currentBuild.number"),
-                string(name: 'DIST_PATH', value: "${path}/dist/")
+                string(name: 'DIST_PATH', value: "${env.WORKSPACE}/dist/")
             ]
         }
         failure {
