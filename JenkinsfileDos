@@ -9,6 +9,9 @@ pipeline {
     stages {
          stage('Copy Artifact') {
             steps {
+                bat('echo %cd%')
+                bat('dir')
+
                 copyArtifacts(projectName: 'FrontendStorePipeline1', filter: 'dist/', fingerprintArtifacts: true)
             }
         }
