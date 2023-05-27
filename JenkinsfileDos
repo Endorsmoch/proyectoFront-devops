@@ -24,7 +24,7 @@ pipeline {
                     bat('dir')
 
                     // Obtener la lista de archivos en el directorio de origen
-                    def files = sh(returnStdout: true, script: 'dir /B ${env.DIST_PATH}').trim().split('\n')
+                    def files = sh(returnStdout: true, script: "dir /B ${env.DIST_PATH}").trim().split('\n')
 
                     // Iterar sobre los archivos y transferirlos individualmente
                     files.each { file ->
