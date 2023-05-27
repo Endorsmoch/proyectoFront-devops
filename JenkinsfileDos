@@ -18,7 +18,7 @@ pipeline {
                     def sshPassword = 'ubuntu'
 
                     // Comando para ejecutar en la máquina virtual
-                    def xcopyCommand = "xcopy ${env.DIST_PATH} \\\\${vmIP}\\devops_web\\ /E /Y /user:${sshUser} ${sshPassword}"
+                    def xcopyCommand = "xcopy ${env.DIST_PATH} \\\\${vmIP}\\devops_web\\ /E /Y /user:${sshUser} /password:${sshPassword}"
 
                     // Ejecutar el comando Xcopy
                     bat(xcopyCommand)
