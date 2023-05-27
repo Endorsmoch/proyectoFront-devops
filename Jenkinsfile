@@ -25,7 +25,7 @@ pipeline {
             echo '¡El pipeline se ha completado exitosamente! Ejecutando segundo pipeline...'
             build job: 'FrontendStorePipeline2', parameters: [
                 string(name: 'BUILD_NUMBER', value: "$currentBuild.number"),
-                string(name: 'DIST_PATH', value: "${env.WORKSPACE}/dist")
+                string(name: 'DIST_PATH', value: "${env.WORKSPACE}\\dist")
             ]
         }
         failure {
