@@ -17,23 +17,22 @@ pipeline {
                     // Contraseña para la conexión SSH
                     def sshPassword = 'ubuntu'
 
+                    // Comando para ejecutar en la máquina virtual
+                    
                     // Ruta completa al archivo pscp.exe con barra invertida duplicada
                     def pscpPath = 'C:/pscp.exe'
 
                     bat('echo %cd%')
                     bat('dir')
 
-                    // Obtener la lista de archivos en el directorio de origen
-                    def files = sh(returnStdout: true, script: "dir /B ${env.DIST_PATH}").trim().split('\n')
+                    // Comando para establecer la conexión SSH y ejecutar los comandos
+                    def sshCommandFull = "${pscpPath} -pw ${sshPassword} -r ${env.DIST_PATH} ${sshUser}@${vmIP}:../../var/www/html/devops_web/"
 
-                    // Iterar sobre los archivos y transferirlos individualmente
-                    files.each { file ->
-                        // Comando para establecer la conexión SSH y transferir el archivo
-                        def sshCommandFull = "${pscpPath} -pw ${sshPassword} ${env.DIST_PATH}\\${file} ${sshUser}@${vmIP}:../../var/www/html/devops_web/"
+                    // Agregar opción "-batch" para evitar la confirmación interactiva de la clave del host
+                    def sshCommandFullWithBatch = "${sshCommandFull} -batch"
 
-                        // Ejecutar el comando SSH
-                        bat(sshCommandFull)
-                    }
+                    // Ejecutar el comando SSH
+                    bat(sshCommandFullWithBatch)
                 }
             }
         }
