@@ -1,56 +1,35 @@
 pipeline {
-    agent any
+  agent any
 
-    parameters {
-        string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
-    }
+  parameters {
+    string(name: 'DIST_PATH', defaultValue: '', description: 'Ubicación del build')
+  }
 
-    environment {
-        BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
-        buildNumber = "${params.BUILD_NUMBER}"
-        buildNumberWithoutQuotes = buildNumber.replace("'", "")
-    }
+  stages {
+    stage('Descargar build en máquina virtual') {
+      steps {
+        script {
+          // Dirección IP de la máquina virtual
+          def vmIP = '192.168.0.26'
+          // Nombre de usuario para la conexión SSH
+          def sshUser = 'ubuntu'
+          // Contraseña para la conexión SSH
+          def sshPassword = 'ubuntu'
 
-    stages {
-        stage('Detener contenedores') {
-            steps {
-                bat '''
-                    SETLOCAL EnableDelayedExpansion
-                    SET "contenedores="
+          def folder = '../../var/www/html/devops_web'
 
-                    FOR /F "tokens=*" %%A IN ('docker ps --filter "name=frontend" --format "{{.Names}}"') DO (
-                        SET "contenedores=!contenedores! %%A"
-                    )
+          def pscpPath = 'C:/Users/gener/OneDrive/Escritorio/pscp.exe'
 
-                    SET contadoresCount=0
-                    FOR %%B IN (!contenedores!) DO (
-                        SET /A contadoresCount+=1
-                    )
+          // Huella digital del servidor SSH
+          def hostKey = 'ssh-ed25519 255 SHA256:V4rGl41cT7XvnrAFEE+wPLvrONJp6uCabSN1oBFVtdc'
 
-                    IF !contadoresCount! equ 1 (
-                        echo Solo hay un contenedor por detener
-                        FOR %%B IN (!contenedores!) DO (
-                            docker stop %%B
-                        )
-                    ) ELSE (
-                        echo No hay contenedores frontend por detener
-                    )
-                '''
-            }
+          def sshCommandFull = "${pscpPath} -pw ${sshPassword} -P 22 ${env.DIST_PATH}\\proyecto-front-devops\\* ${sshUser}@${vmIP}:${folder}"
+          bat(sshCommandFull)
         }
-        stage('Construir Imagen') {
-            steps {
-                bat "docker build -t store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes} ."
-            }
-        }
-        stage('Desplegar Imagen') {
-            steps {
-                bat "docker run -d -p 8081:80 --name store-frontend-1.0.0-${buildNumberWithoutQuotes} --network=store-devops-network store-frontend-${BRANCH_NAME}:1.0.0-${buildNumberWithoutQuotes}"
-            }
-        }
+      }
     }
-
-    post {
+  }
+  post {
         success {
             echo '¡El segundo pipeline se ha completado exitosamente!'
         }
