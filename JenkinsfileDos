@@ -4,12 +4,10 @@ pipeline {
   parameters {
     string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
     string(name: 'DIST_PATH', defaultValue: '', description: 'Ubicación del build')
-
   }
-    
 
   stages {
-    stage('Conexión SSH y comandos en la máquina virtual') {
+    stage('Descargar build en máquina virtual') {
       steps {
         script {
           // Dirección IP de la máquina virtual
