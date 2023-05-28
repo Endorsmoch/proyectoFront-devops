@@ -26,7 +26,7 @@ pipeline {
           // Huella digital del servidor SSH
           def hostKey = 'ssh-ed25519 255 SHA256:V4rGl41cT7XvnrAFEE+wPLvrONJp6uCabSN1oBFVtdc'
 
-          def sshCommandFull = "${pscpPath} -pw ${sshPassword} -P 22 ${params.DIST_Path}\\* ${sshUser}@${vmIP}:${folder}"
+          def sshCommandFull = "${pscpPath} -pw ${sshPassword} -P 22 ${env.DIST_PATH}\\* ${sshUser}@${vmIP}:${folder}"
           bat(sshCommandFull)
         }
       }
