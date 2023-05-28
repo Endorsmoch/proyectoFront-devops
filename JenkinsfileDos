@@ -2,7 +2,6 @@ pipeline {
   agent any
 
   parameters {
-    string(name: 'BUILD_NUMBER', defaultValue: '', description: 'Número de versión')
     string(name: 'DIST_PATH', defaultValue: '', description: 'Ubicación del build')
   }
 
