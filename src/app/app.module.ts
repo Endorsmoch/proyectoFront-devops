@@ -32,6 +32,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'; 
 import {MatMenuModule} from '@angular/material/menu';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 
@@ -68,7 +69,7 @@ import {MatMenuModule} from '@angular/material/menu';
     FormsModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
